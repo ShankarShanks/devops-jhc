@@ -1,0 +1,46 @@
+- hosts: apache
+  become: True
+  gather_facts: yes
+  tasks:
+    - name: Install apache
+      yum:
+        name: httpd
+        state: installed
+      when: ansible_os_family == "RedHat"
+      tags:
+        - installlinux
+    - name: Install apache on Ubuntu
+      apt:
+        name: apache2
+        state: installed
+      when: ansible_os_family == "Debina"
+      tags:
+        - installdebina
+    - name: place index file on apache
+      copy:
+        src: index.html
+        dest: /var/www/html/
+      tags:
+        - deploy
+    - name: start apache
+      service:
+        name: httpd
+        state: started
+        enabled: True
+      tags:
+        - start
+    - name: change default port to 80
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        insertafter: '^#Listen '
+        line: 'Listen 80'
+      notify:
+        - restart apache
+      tags:
+        - changeport
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted

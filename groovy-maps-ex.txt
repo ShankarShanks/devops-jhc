@@ -1,0 +1,11 @@
+def users = ['1234':"hari",'1235':"ram",'1256':"geetha"]
+
+println("Print keys")
+users.keySet().each {
+    println(it)
+}
+
+println("Print values")
+users.values().each {
+    println(it)
+}

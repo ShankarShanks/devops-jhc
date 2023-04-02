@@ -1,0 +1,1 @@
+kubectl create secret docker-registry jhchub --docker-server=https://index.docker.io/v1/ --docker-username=kammana --docker-password=Cloud@1234 --docker-email=hari.kammana@gmail.com

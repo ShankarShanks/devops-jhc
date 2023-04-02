@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    parameters {
+         string defaultValue: 'shanks', description: 'choose your name', name: 'name'
+    }
+    stages {
+        stage ("param demo") {
+            steps {
+                echo "hi $name,welcome to jenkins"
+            }
+        }
+    }
+}

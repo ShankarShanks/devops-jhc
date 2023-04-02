@@ -1,0 +1,1 @@
+mvn archetype:generate -DgroupId=om.shanks -DartifactId=getjob -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false

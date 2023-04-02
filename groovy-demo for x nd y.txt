@@ -1,0 +1,24 @@
+pipeline {
+    parameters {
+    string defaultValue: '10', description: 'Enter value for x', name: 'x'
+    string defaultValue: '20', description: 'Enter value for y', name: 'y'
+}
+    agent any
+
+    stages {
+        stage('Gratest Number') {
+            steps {
+                script {
+                    x = params.x as int
+                    y = params.y as int
+                    if(x>y) {
+                        println ("${x} is gratest")
+                    }    
+                    else {
+                        println ("${y} is gratest")
+                    }
+                }
+            }
+        }
+    }
+}

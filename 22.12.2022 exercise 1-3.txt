@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    parameters {
+      choice choices: ['Dev', 'Test', 'Prod'], name: 'env'
+    }
+
+    stages {
+        stage('Dev') {
+            when {
+                expression { params.env == "Dev" }
+            }
+            steps {
+                echo 'Deploy to Dev environment'
+            }
+        }
+        stage('Test') {
+            when {
+                expression { params.env == "Test" }
+            }
+            steps {
+                echo 'Deploy to Test environment'
+            }
+        }
+        stage('Prod') {
+            when {
+                expression { params.env == "Prod" }
+            }
+            steps {
+                echo 'Deploy to Prod environment'
+            }
+        }
+        stage('Run Selenium Test') {
+            when {
+                expression { params.env == "Dev" }
+            }
+            steps {
+                echo 'calling selenuim test job'
+            }
+        }
+    }
+    post {
+        success {
+            echo 'This job is success'
+        }
+    }
+}

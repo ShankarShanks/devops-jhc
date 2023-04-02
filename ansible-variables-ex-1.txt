@@ -1,0 +1,8 @@
+- hosts: localhost
+  vars:
+    - user_name: admin
+    - db_ip: 172.31.3.45
+  tasks:
+    - name: install and setup mysql
+      debug:
+        msg: This username is {{ user_name }} and ip is {{ db_ip }}

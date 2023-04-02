@@ -1,0 +1,14 @@
+Unit]
+Description=nexus 3.45.1-01 service
+After=network.target
+
+[Service]
+Type=forking
+LimitNOFILE=65536
+User=nexus
+Group=nexus
+ExecStart=/opt/nexus/bin/nexus start
+ExecStop=/opt/nexus/bin/nexus stop
+Restart=Always
+[Install]
+wantedBy=multi-user.target

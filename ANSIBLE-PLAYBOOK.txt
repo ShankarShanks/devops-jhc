@@ -1,0 +1,29 @@
+- hosts: 172.31.3.172,172.31.14.49
+  become: True
+  tasks:
+    - name: Install apache
+      yum:
+        name: httpd
+        state: installed
+    - name: place index file on apache
+      copy:
+        src: index.html
+        dest: /var/www/html/
+    - name: start apache
+      service:
+        name: httpd
+        state: started
+        enabled: True
+    - name: change default port to 80
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        insertafter: '^#Listen '
+        line: 'Listen 80'
+      notify:
+        - restart apache
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
